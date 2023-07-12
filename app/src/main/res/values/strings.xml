@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">ewide-technical-test</string>
     <string name="games_not_found">Games Not Found</string>
+    <string name="games">Games</string>
+    <string name="detail_games">Detail Games</string>
+    <string name="text_price_title_detail">Grab it fast. Best Deal price only</string>
 </resources>

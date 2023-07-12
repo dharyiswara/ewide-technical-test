@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ewide.test.daryhilmyiswara.R
 import com.ewide.test.daryhilmyiswara.adapter.GamesListAdapter
 import com.ewide.test.daryhilmyiswara.databinding.ActivityGamesListBinding
+import com.ewide.test.daryhilmyiswara.ui.gamedetail.GameDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,7 +37,7 @@ class GamesListActivity : AppCompatActivity() {
                 LinearLayoutManager(this@GamesListActivity, LinearLayoutManager.VERTICAL, false)
             adapter = gamesListAdapter.apply {
                 setOnClickListener {
-
+                    GameDetailActivity.startActivity(this@GamesListActivity, it)
                 }
             }
         }
