@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ewide.test.daryhilmyiswara.R
 import com.ewide.test.daryhilmyiswara.adapter.GamesListAdapter
 import com.ewide.test.daryhilmyiswara.databinding.ActivityGamesListBinding
+import com.ewide.test.daryhilmyiswara.ui.favorite.FavoriteGameActivity
 import com.ewide.test.daryhilmyiswara.ui.gamedetail.GameDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,6 +41,9 @@ class GamesListActivity : AppCompatActivity() {
                     GameDetailActivity.startActivity(this@GamesListActivity, it)
                 }
             }
+        }
+        binding.ivFavorite.setOnClickListener {
+            FavoriteGameActivity.startActivity(this)
         }
     }
 

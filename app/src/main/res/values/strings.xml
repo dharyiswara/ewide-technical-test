@@ -4,4 +4,6 @@
     <string name="games">Games</string>
     <string name="detail_games">Detail Games</string>
     <string name="text_price_title_detail">Grab it fast. Best Deal price only</string>
+    <string name="favorite_games">Favorite Games</string>
+    <string name="no_favorite">No Game Favorite Found</string>
 </resources>

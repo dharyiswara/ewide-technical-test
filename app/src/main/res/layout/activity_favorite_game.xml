@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.gameslist.GamesListActivity">
+    android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
@@ -21,37 +20,28 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/Theme.Ewidetechnicaltest.PopupOverlay">
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                app:srcCompat="@drawable/ic_back"
+                app:tint="@color/white" />
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/games"
+                android:text="@string/favorite_games"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_favorite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginEnd="16dp"
-                android:tint="@color/white"
-                app:srcCompat="@drawable/ic_favorite" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_sort"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_gravity="end"
-                android:layout_marginEnd="8dp"
-                android:tint="@color/white"
-                app:srcCompat="@drawable/ic_sort_ascending" />
 
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_games"
+        android:id="@+id/rv_favorite_games"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginVertical="8dp"
@@ -60,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@id/appBar" />
 
     <ProgressBar
-        android:id="@+id/pb_games"
+        android:id="@+id/pb_favorite_games"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -69,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@id/appBar" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_games_error"
+        android:id="@+id/tv_favorite_games_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="24sp"

@@ -30,6 +30,9 @@
         <activity
             android:name=".ui.gamedetail.GameDetailActivity"
             android:theme="@style/Theme.Ewidetechnicaltest.NoActionBar" />
+        <activity
+            android:name=".ui.favorite.FavoriteGameActivity"
+            android:theme="@style/Theme.Ewidetechnicaltest.NoActionBar" />
     </application>
 
 </manifest>
