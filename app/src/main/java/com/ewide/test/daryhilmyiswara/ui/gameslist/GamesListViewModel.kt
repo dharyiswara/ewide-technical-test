@@ -36,4 +36,10 @@ class GamesListViewModel @Inject constructor(
         }
     }
 
+    fun setIsSortAscending(isSortAscending: Boolean) {
+        gamesListRepository.setIsSortAscending(isSortAscending)
+    }
+
+    fun isSortAscending(): Boolean = gamesListRepository.isSortAscending()
+
 }

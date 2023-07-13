@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ewide.test.daryhilmyiswara.R
 import com.ewide.test.daryhilmyiswara.adapter.GamesListAdapter
 import com.ewide.test.daryhilmyiswara.databinding.ActivityGamesListBinding
+import com.ewide.test.daryhilmyiswara.model.Games
 import com.ewide.test.daryhilmyiswara.ui.favorite.FavoriteGameActivity
 import com.ewide.test.daryhilmyiswara.ui.gamedetail.GameDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,13 +47,19 @@ class GamesListActivity : AppCompatActivity() {
         binding.ivFavorite.setOnClickListener {
             FavoriteGameActivity.startActivity(this)
         }
+        binding.ivSort.setOnClickListener {
+            viewModel.getGamesListLiveData().value?.let {
+                viewModel.setIsSortAscending(!viewModel.isSortAscending())
+                gamesListAdapter.updateListGames(sortData(it))
+            }
+        }
     }
 
     private fun subscribeToLiveData() {
         viewModel.getGamesListLiveData().observe(this) {
             if (it.isNotEmpty()) {
                 binding.rvGames.visibility = View.VISIBLE
-                gamesListAdapter.updateListGames(it)
+                gamesListAdapter.updateListGames(sortData(it))
             } else {
                 binding.rvGames.visibility = View.GONE
                 binding.tvGamesError.visibility = View.VISIBLE
@@ -72,6 +80,20 @@ class GamesListActivity : AppCompatActivity() {
         viewModel.getErrorLiveData().observe(this) {
             binding.tvGamesError.visibility = View.VISIBLE
             binding.tvGamesError.text = it
+        }
+    }
+
+    private fun sortData(data: List<Games>): List<Games> {
+        return if (viewModel.isSortAscending()) {
+            binding.ivSort.setImageDrawable(
+                ContextCompat.getDrawable(this, R.drawable.ic_sort_ascending)
+            )
+            data.sortedBy { it.name }
+        } else {
+            binding.ivSort.setImageDrawable(
+                ContextCompat.getDrawable(this, R.drawable.ic_sort_descending)
+            )
+            data.sortedByDescending { it.name }
         }
     }
 
