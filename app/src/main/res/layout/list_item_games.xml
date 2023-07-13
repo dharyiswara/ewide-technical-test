@@ -22,13 +22,14 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_games_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/iv_games"
             app:layout_constraintTop_toTopOf="@id/iv_games"
+            app:layout_constraintEnd_toEndOf="parent"
             tools:text="Kingdom Heart IV" />
 
         <androidx.appcompat.widget.AppCompatTextView

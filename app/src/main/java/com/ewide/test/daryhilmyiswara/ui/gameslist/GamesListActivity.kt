@@ -1,7 +1,9 @@
 package com.ewide.test.daryhilmyiswara.ui.gameslist
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ewide.test.daryhilmyiswara.R
 import com.ewide.test.daryhilmyiswara.adapter.GamesListAdapter
 import com.ewide.test.daryhilmyiswara.databinding.ActivityGamesListBinding
+import com.ewide.test.daryhilmyiswara.helper.DebounceQueryTextListener
 import com.ewide.test.daryhilmyiswara.model.Games
 import com.ewide.test.daryhilmyiswara.ui.favorite.FavoriteGameActivity
 import com.ewide.test.daryhilmyiswara.ui.gamedetail.GameDetailActivity
@@ -53,12 +56,32 @@ class GamesListActivity : AppCompatActivity() {
                 gamesListAdapter.updateListGames(sortData(it))
             }
         }
+        binding.svGames.run {
+            setOnQueryTextListener(
+                DebounceQueryTextListener(
+                    lifecycle,
+                    {
+                        val query = it.orEmpty()
+                        if (query.isNotEmpty()) {
+                            viewModel.getGamesList(query)
+                        } else {
+                            viewModel.getGamesList()
+                        }
+                    },
+                    {
+                        hideKeyboard()
+                        clearFocus()
+                    }
+                )
+            )
+        }
     }
 
     private fun subscribeToLiveData() {
         viewModel.getGamesListLiveData().observe(this) {
             if (it.isNotEmpty()) {
                 binding.rvGames.visibility = View.VISIBLE
+                binding.tvGamesError.visibility = View.GONE
                 gamesListAdapter.updateListGames(sortData(it))
             } else {
                 binding.rvGames.visibility = View.GONE
@@ -94,6 +117,14 @@ class GamesListActivity : AppCompatActivity() {
                 ContextCompat.getDrawable(this, R.drawable.ic_sort_descending)
             )
             data.sortedByDescending { it.name }
+        }
+    }
+
+    private fun hideKeyboard() {
+        val view = this.currentFocus
+        view?.let {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+            imm?.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 
